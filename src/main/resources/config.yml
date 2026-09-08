@@ -1,0 +1,43 @@
+# WSMP-PassiveSpawners Configuration Layer
+global-settings:
+  max-spawner-level: 50
+  allow-bedrock-holograms: false
+  break-behavior: "RETURN_CURRENT_LEVEL" # Options: RETURN_LEVEL_1, DESTROY, RETURN_CURRENT_LEVEL
+  default-generation-interval-ticks: 200 # 10 seconds baseline
+  hologram-height-offset: 1.2 # Blocks above the spawner block the level hologram floats
+
+# Scaling formulas applied over base mob properties
+scaling-modifiers:
+  loot-multiplier-per-level: 1.0 # Multiplier = 1.0 + (level - 1) * modifier
+  xp-multiplier-per-level: 1.0 # Multiplier = 1.0 + (level - 1) * modifier
+  interval-reduction-per-level-ticks: 0 # Set above 0 to speed up ticks instead of scaling quantity
+
+# Player-facing chat messages. '&' color codes are supported.
+messages:
+  no-permission-place: "&cYou don't have permission to place spawners."
+  no-permission-upgrade: "&cYou don't have permission to upgrade spawners."
+  no-permission-break: "&cYou don't have permission to break spawners."
+  no-permission-claimxp: "&cYou don't have permission to claim spawner XP."
+  max-level-reached: "&eThat spawner is already at the max level (%level%)."
+  spawner-upgraded: "&aSpawner upgraded to level %level%!"
+  not-enough-xp: "&7This spawner doesn't have enough accumulated XP to claim yet."
+  xp-claimed: "&aClaimed %amount% XP from the spawner."
+
+# Individual mob table configurations and overrides
+spawner-registry:
+  zombie:
+    enabled: true
+    base-xp-reward: 5
+    generation-interval-ticks: 200
+  skeleton:
+    enabled: true
+    base-xp-reward: 5
+    generation-interval-ticks: 200
+  blaze:
+    enabled: true
+    base-xp-reward: 10
+    generation-interval-ticks: 300
+  creeper:
+    enabled: true
+    base-xp-reward: 5
+    generation-interval-ticks: 240
