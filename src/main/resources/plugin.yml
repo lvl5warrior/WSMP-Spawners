@@ -1,0 +1,34 @@
+name: WSMP-PassiveSpawners
+version: 1.0.0
+main: com.warriorssmp.passivespawners.PassiveSpawnersPlugin
+api-version: '1.21'
+author: WarriorsSMP
+description: Loot-table-driven passive spawners - no persistent, AI-driven mobs ever exist; loot/XP generate directly on a timer (a brief, fully inert entity is used only to satisfy vanilla loot table context, removed instantly).
+
+softdepend: [Floodgate]
+
+commands:
+  wsmpadmin:
+    description: WSMP-PassiveSpawners admin commands
+    usage: /wsmpadmin spawners give|list ...
+    permission: wsmpspawners.admin
+
+permissions:
+  wsmpspawners.admin:
+    description: Full admin access (give/list spawners)
+    default: op
+  wsmpspawners.place:
+    description: Allows placing custom spawners
+    default: true
+  wsmpspawners.upgrade:
+    description: Allows stacking spawners to increase their level
+    default: true
+  wsmpspawners.break:
+    description: Allows breaking custom spawners
+    default: true
+  wsmpspawners.claimxp:
+    description: Allows right-click-claiming accumulated XP from a spawner
+    default: true
+  wsmpspawners.collectitems:
+    description: Allows collecting accumulated items from a spawner's internal storage
+    default: true
