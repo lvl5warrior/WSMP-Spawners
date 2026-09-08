@@ -1,0 +1,119 @@
+# WSMP-PassiveSpawners Configuration Layer
+global-settings:
+  max-spawner-level: 10
+  allow-bedrock-holograms: false
+  break-behavior: "RETURN_CURRENT_LEVEL" # Options: RETURN_LEVEL_1, DESTROY, RETURN_CURRENT_LEVEL
+  default-generation-interval-ticks: 400 # 20 seconds baseline - doubled from 200 to slow the base rate down
+  hologram-height-offset: 1.2 # Blocks above the spawner block the level hologram floats
+  max-stored-item-stacks: 45 # Internal storage capacity (items beyond a full container AND this cap drop on the ground as a last resort)
+  hologram-visibility-check-radius: 48 # Only check/update visibility for players within this many blocks of a spawner
+  hologram-visibility-check-interval-ticks: 10 # How often (in ticks) to re-check line-of-sight per player
+
+# Scaling formulas applied over base mob properties
+scaling-modifiers:
+  loot-multiplier-per-level: 0.3 # Multiplier = 1.0 + (level - 1) * modifier - at level 10 this is ~3.7x rolls, not 10x
+  xp-multiplier-per-level: 0.3 # Same formula applied to XP
+  interval-reduction-per-level-ticks: 0 # Set above 0 to speed up ticks instead of scaling quantity
+
+# Player-facing chat messages. '&' color codes are supported.
+messages:
+  no-permission-place: "&cYou don't have permission to place spawners."
+  no-permission-upgrade: "&cYou don't have permission to upgrade spawners."
+  no-permission-break: "&cYou don't have permission to break spawners."
+  no-permission-claimxp: "&cYou don't have permission to claim spawner XP."
+  no-permission-collectitems: "&cYou don't have permission to collect items from this spawner."
+  max-level-reached: "&eThat spawner is already at the max level (%level%)."
+  spawner-upgraded: "&aSpawner upgraded to level %level%!"
+  not-enough-xp: "&7This spawner doesn't have enough accumulated XP to claim yet."
+  xp-claimed: "&aClaimed %amount% XP from the spawner."
+  gui-spawner-given: "&aGave you %amount%x %mob% spawner(s)."
+  gui-title: "&8Give a Passive Spawner"
+  gui-items-collected: "&aCollected all stored items from the spawner."
+  info-gui-title: "&8%mob% Spawner Info"
+  spawn-egg-blocked: "&cThis spawner's mob type is fixed at placement and can't be changed with a spawn egg."
+
+# Individual mob table configurations and overrides.
+# generation-interval-ticks is optional per mob - omitted entries fall back
+# to global-settings.default-generation-interval-ticks above.
+spawner-registry:
+
+  # --- Overworld hostile ---
+  zombie: { enabled: true, base-xp-reward: 5 }
+  zombie_villager: { enabled: true, base-xp-reward: 5 }
+  husk: { enabled: true, base-xp-reward: 5 }
+  drowned: { enabled: true, base-xp-reward: 5 }
+  skeleton: { enabled: true, base-xp-reward: 5 }
+  stray: { enabled: true, base-xp-reward: 5 }
+  spider: { enabled: true, base-xp-reward: 5 }
+  cave_spider: { enabled: true, base-xp-reward: 5 }
+  creeper: { enabled: true, base-xp-reward: 5 }
+  enderman: { enabled: true, base-xp-reward: 5 }
+  endermite: { enabled: true, base-xp-reward: 3 }
+  silverfish: { enabled: true, base-xp-reward: 5 }
+  slime: { enabled: true, base-xp-reward: 4 }
+  witch: { enabled: true, base-xp-reward: 5 }
+  pillager: { enabled: true, base-xp-reward: 5 }
+  vindicator: { enabled: true, base-xp-reward: 5 }
+  evoker: { enabled: true, base-xp-reward: 10 }
+  vex: { enabled: true, base-xp-reward: 3 }
+  ravager: { enabled: true, base-xp-reward: 20 }
+  phantom: { enabled: true, base-xp-reward: 5 }
+  guardian: { enabled: true, base-xp-reward: 10 }
+  elder_guardian: { enabled: true, base-xp-reward: 10, generation-interval-ticks: 400 }
+  shulker: { enabled: true, base-xp-reward: 5 }
+  warden: { enabled: false, base-xp-reward: 5, generation-interval-ticks: 1200 } # extremely dangerous mob - opt-in deliberately
+
+  # --- Nether ---
+  blaze: { enabled: true, base-xp-reward: 10, generation-interval-ticks: 300 }
+  ghast: { enabled: true, base-xp-reward: 5 }
+  magma_cube: { enabled: true, base-xp-reward: 4 }
+  wither_skeleton: { enabled: true, base-xp-reward: 5 }
+  piglin: { enabled: true, base-xp-reward: 5 }
+  piglin_brute: { enabled: true, base-xp-reward: 5 }
+  hoglin: { enabled: true, base-xp-reward: 5 }
+  zoglin: { enabled: true, base-xp-reward: 5 }
+  zombified_piglin: { enabled: true, base-xp-reward: 5 }
+  strider: { enabled: true, base-xp-reward: 1 }
+
+  # --- Bosses (disabled by default - opt in deliberately, these are far
+  #     more powerful than a normal farmable mob and need careful balance) ---
+  wither: { enabled: false, base-xp-reward: 50, generation-interval-ticks: 2400 }
+  ender_dragon: { enabled: false, base-xp-reward: 500, generation-interval-ticks: 6000 }
+
+  # --- Passive / farm animals ---
+  cow: { enabled: true, base-xp-reward: 1 }
+  mooshroom: { enabled: true, base-xp-reward: 1 }
+  pig: { enabled: true, base-xp-reward: 1 }
+  sheep: { enabled: true, base-xp-reward: 1 }
+  chicken: { enabled: true, base-xp-reward: 1 }
+  rabbit: { enabled: true, base-xp-reward: 1 }
+  horse: { enabled: true, base-xp-reward: 1 }
+  donkey: { enabled: true, base-xp-reward: 1 }
+  mule: { enabled: true, base-xp-reward: 1 }
+  llama: { enabled: true, base-xp-reward: 1 }
+  trader_llama: { enabled: true, base-xp-reward: 1 }
+  wolf: { enabled: true, base-xp-reward: 1 }
+  cat: { enabled: true, base-xp-reward: 1 }
+  ocelot: { enabled: true, base-xp-reward: 1 }
+  fox: { enabled: true, base-xp-reward: 1 }
+  panda: { enabled: true, base-xp-reward: 1 }
+  bee: { enabled: true, base-xp-reward: 1 }
+  turtle: { enabled: true, base-xp-reward: 1 }
+  polar_bear: { enabled: true, base-xp-reward: 1 }
+  goat: { enabled: true, base-xp-reward: 1 }
+  frog: { enabled: true, base-xp-reward: 1 }
+  allay: { enabled: true, base-xp-reward: 1 }
+  camel: { enabled: true, base-xp-reward: 1 }
+  sniffer: { enabled: true, base-xp-reward: 1 }
+  parrot: { enabled: true, base-xp-reward: 1 }
+  bat: { enabled: true, base-xp-reward: 1 }
+
+  # --- Aquatic ---
+  squid: { enabled: true, base-xp-reward: 1 }
+  glow_squid: { enabled: true, base-xp-reward: 1 }
+  cod: { enabled: true, base-xp-reward: 1 }
+  salmon: { enabled: true, base-xp-reward: 1 }
+  tropical_fish: { enabled: true, base-xp-reward: 1 }
+  pufferfish: { enabled: true, base-xp-reward: 1 }
+  dolphin: { enabled: true, base-xp-reward: 1 }
+  axolotl: { enabled: true, base-xp-reward: 1 }
